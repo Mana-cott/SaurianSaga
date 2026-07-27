@@ -50,6 +50,7 @@ void ASaurianHeroCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInp
 	USaurianInputComponent* SaurianInputComponent = CastChecked<USaurianInputComponent>(PlayerInputComponent);
 	
 	SaurianInputComponent->BindNativeInputAction(InputConfigDataAsset, SaurianGameplayTags::InputTag_Move, ETriggerEvent::Triggered, this, &ThisClass::Input_Move);
+	SaurianInputComponent->BindNativeInputAction(InputConfigDataAsset, SaurianGameplayTags::InputTag_Look, ETriggerEvent::Triggered, this, &ThisClass::Input_Look);
 }
 
 void ASaurianHeroCharacter::BeginPlay()
@@ -75,5 +76,20 @@ void ASaurianHeroCharacter::Input_Move(const FInputActionValue& InputActionValue
 		const FVector RightDirection = MovementRotation.RotateVector(FVector::RightVector);
 
 		AddMovementInput(RightDirection, MovementVector.X);
+	}
+}
+
+void ASaurianHeroCharacter::Input_Look(const FInputActionValue& InputActionValue)
+{
+	const FVector2D LookAxisVector = InputActionValue.Get<FVector2D>();
+
+	if (LookAxisVector.X != 0.f)
+	{
+		AddControllerYawInput(LookAxisVector.X);
+	}
+
+	if (LookAxisVector.Y != 0.f)
+	{
+		AddControllerPitchInput(LookAxisVector.Y);
 	}
 }
