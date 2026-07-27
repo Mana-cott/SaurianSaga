@@ -51,6 +51,7 @@ void ASaurianHeroCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInp
 	
 	SaurianInputComponent->BindNativeInputAction(InputConfigDataAsset, SaurianGameplayTags::InputTag_Move, ETriggerEvent::Triggered, this, &ThisClass::Input_Move);
 	SaurianInputComponent->BindNativeInputAction(InputConfigDataAsset, SaurianGameplayTags::InputTag_Look, ETriggerEvent::Triggered, this, &ThisClass::Input_Look);
+	SaurianInputComponent->BindNativeInputAction(InputConfigDataAsset, SaurianGameplayTags::InputTag_Jump, ETriggerEvent::Triggered, this, &ThisClass::Input_Jump);
 }
 
 void ASaurianHeroCharacter::BeginPlay()
@@ -92,4 +93,9 @@ void ASaurianHeroCharacter::Input_Look(const FInputActionValue& InputActionValue
 	{
 		AddControllerPitchInput(LookAxisVector.Y);
 	}
+}
+
+void ASaurianHeroCharacter::Input_Jump(const FInputActionValue& InputActionValue)
+{
+	Super::Jump();
 }
