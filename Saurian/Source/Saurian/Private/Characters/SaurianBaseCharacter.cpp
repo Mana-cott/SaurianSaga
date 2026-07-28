@@ -2,6 +2,8 @@
 
 
 #include "Characters/SaurianBaseCharacter.h"
+#include "AbilitySystem/SaurianAbilitySystemComponent.h"
+#include "AbilitySystem/SaurianAttributeSet.h"
 
 // Sets default values
 ASaurianBaseCharacter::ASaurianBaseCharacter()
@@ -11,4 +13,23 @@ ASaurianBaseCharacter::ASaurianBaseCharacter()
 	PrimaryActorTick.bStartWithTickEnabled = false;
 
 	GetMesh()->bReceivesDecals = false;
+
+	SaurianAbilitySystemComponent = CreateDefaultSubobject<USaurianAbilitySystemComponent>(TEXT("SaurianAbilitySystemComponent"));
+
+	SaurianAttributeSet = CreateDefaultSubobject<USaurianAttributeSet>(TEXT("SaurianAttributeSet"));
+}
+
+UAbilitySystemComponent* ASaurianBaseCharacter::GetAbilitySystemComponent() const
+{
+	return GetSaurianAbilitySystemComponent();
+}
+
+void ASaurianBaseCharacter::PossessedBy(AController* NewController)
+{
+	Super::PossessedBy(NewController);
+
+	if (SaurianAbilitySystemComponent)
+	{
+		SaurianAbilitySystemComponent->InitAbilityActorInfo(this, this);
+	}
 }

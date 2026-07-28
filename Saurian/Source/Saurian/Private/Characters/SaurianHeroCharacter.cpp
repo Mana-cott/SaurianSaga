@@ -40,6 +40,11 @@ ASaurianHeroCharacter::ASaurianHeroCharacter()
 	GetCharacterMovement()->BrakingDecelerationWalking = 2000.f;
 }
 
+void ASaurianHeroCharacter::PossessedBy(AController* NewController)
+{
+	Super::PossessedBy(NewController);
+}
+
 void ASaurianHeroCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	checkf(InputConfigDataAsset, TEXT("Forgot to assign a valid Data Asset as Input Config"));
