@@ -3,7 +3,7 @@
 
 #include "AbilitySystem/Abilities/SaurianGameplayAbility.h"
 #include "AbilitySystem/SaurianAbilitySystemComponent.h"
-#include "SaurianGameplayAbility.h"
+#include "AbilitySystem/Abilities/SaurianGameplayAbility.h"
 
 void USaurianGameplayAbility::OnGiveAbility(const FGameplayAbilityActorInfo* ActorInfo, const FGameplayAbilitySpec& Spec)
 {
